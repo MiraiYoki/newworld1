@@ -1,0 +1,47 @@
+if (!window.SCRIPT_DATA) window.SCRIPT_DATA = {};
+if (!window.SCRIPT_DATA['character_4']) window.SCRIPT_DATA['character_4'] = {};
+
+window.SCRIPT_DATA['character_4']['chapter_8'] = {
+  title: '小王子',
+  subtitle: '',
+  sections: [
+    { id: 'c4_ch8_s1', type: 'narrative', content: '[small]故事到这里就接近尾声了[/small]' },
+    { id: 'c4_ch8_s2', type: 'narrative', content: '[small]我也要继续踏上旅途了[/small]' },
+    { id: 'c4_ch8_s3', type: 'narrative', content: '[small]希望一切都好[/small]' },
+    { id: 'c4_ch8_s4', type: 'narrative', content: '[small]致[/small]' },
+    { id: 'c4_ch8_s5', type: 'narrative', content: '[small]敬礼[/small]' },
+    { id: 'c4_ch8_s6', type: 'narrative', content: '' },
+    { id: 'c4_ch8_s7', type: 'narrative', content: '[center]<strong>如果你爱上了某个星球的一朵花，</strong>[/center]' },
+    { id: 'c4_ch8_s8', type: 'narrative', content: '[center]<strong>那么，只要在夜晚仰望星空，就会觉得漫天的繁星就像一朵朵盛开的花。</strong>[/center]' },
+    { id: 'c4_ch8_s9', type: 'narrative', content: '' },
+    { id: 'c4_ch8_s10', type: 'narrative', content: '\u3000\u3000巨龙心脏的守护灵，将你们困于这座孤岛。' },
+    { id: 'c4_ch8_s11', type: 'narrative', content: '\u3000\u3000这是天和地的终点，是一座高大的坟墓……埋葬着一个古老的、永恒的灵魂。' },
+    { id: 'c4_ch8_s12', type: 'narrative', content: '\u3000\u3000你们望着那颗被包裹在水晶中的、不断跳动的心脏，众人都没有言语。在这样极度的安静中，天地间似乎只有这颗心脏跳动的嗡鸣声，山川潮汐都为之回响。' },
+    { id: 'c4_ch8_s13', type: 'narrative', content: '\u3000\u3000<strong>"龙已经死了。"</strong>守护灵毫无情感地说道。' },
+    { id: 'c4_ch8_s14', type: 'narrative', content: '\u3000\u3000——龙已经死去很久很久了。' },
+    { id: 'c4_ch8_s15', type: 'narrative', content: '\u3000\u3000久到太阳和月亮的光辉都变得黯淡，久到游人远行而来，也只能看见死亡的阴影。' },
+    { id: 'c4_ch8_s16', type: 'narrative', content: '' },
+    { id: 'c4_ch8_s17', type: 'narrative', content: '\u3000\u3000渐渐地，在这样压抑的宁静中，在龙的心跳声下，你回忆起了自己远道而来的目的。' },
+    { id: 'c4_ch8_s18', type: 'narrative', content: '' },
+    { id: 'c4_ch8_s19', type: 'narrative', content: '\u3000\u3000你的名字是<strong>李云意</strong>，名字是你父亲取的，取自"火冷灯稀霜露下，昏昏雪意云垂野"。这是非常古老的诗歌了，你并不能辨认它的年代。你觉得，有这样一个名字的人，可能是想要长出翅膀翱翔的。但你到底没有飞起来，而是吻向了土地。' },
+    { id: 'c4_ch8_s20', type: 'narrative', content: '\u3000\u3000你所出生的时代，是一个非常幸运的时代。人类在这个世界，经历了成千上万年的变迁，从农耕时代进入工业时代，再从工业时代发展到科技时代。科技大爆炸后，战争连绵不朽，人类从极度的兴盛转入彻骨的寒冬，疾病、瘟疫、天灾纷纷降临。' },
+    { id: 'c4_ch8_s21', type: 'narrative', content: '\u3000\u3000你在历史课上学习到，就在两个世纪前，还发生过一起世界规模的疾病。那病被称为<strong>月光综合征</strong>，死伤无数，人口大量锐减，直到最后，人们才战胜了病毒，花了非常大的代价和努力，将这项疾病永远封存在历史的河流中。' },
+    { id: 'c4_ch8_s22', type: 'narrative', content: '\u3000\u3000在那之后，已经度过了两百年的和平时代了。' },
+    { id: 'c4_ch8_s23', type: 'narrative', content: '' },
+    { id: 'c4_ch8_s24', type: 'narrative', content: '\u3000\u3000不过只是历史上所记载的东西罢了。' },
+    { id: 'c4_ch8_s25', type: 'narrative', content: '' },
+    { id: 'c4_ch8_s26', type: 'narrative', content: '\u3000\u3000你与其他人一样，在这个幸运的时代中，过着平淡而守序地生活。长大、读书、认识世间万物，有一些伙伴和朋友，伴随日月更迭而宁静地生活。' },
+    { id: 'c4_ch8_s27', type: 'narrative', content: '' },
+    { id: 'c4_ch8_s28', type: 'narrative', content: '\u3000\u3000大概……这就是最普通、最没有波澜的生活。' },
+    { id: 'c4_ch8_s29', type: 'narrative', content: '' },
+    { id: 'c4_ch8_s30', type: 'narrative', content: '\u3000\u3000但又是从什么时候起，你选择踏上这条旅途呢？这座在海上的孤岛，是曾经战争后的存留地，上面是曾经月光综合征爆发的土地，在动荡结束后只剩一片废墟。经过时间和自然的照拂，过了数百年的时间，才重新焕发生机。' },
+    { id: 'c4_ch8_s31', type: 'narrative', content: '' },
+    { id: 'c4_ch8_s32', type: 'narrative', content: '\u3000\u3000你给自己起名叫<strong>"小王子"</strong>，是因为冥冥之中的感应，还是因为你和那个古老童话里的"小王子"一样，都爱上了一朵玫瑰呢？' },
+    { id: 'c4_ch8_s33', type: 'narrative', content: '' },
+    { id: 'c4_ch8_s34', type: 'narrative', content: '\u3000\u3000到底为什么，你要到这座岛上来呢，你眼前这颗巨龙的心脏……' },
+    { id: 'c4_ch8_s35', type: 'narrative', content: '' },
+    { id: 'c4_ch8_s36', type: 'narrative', content: '\u3000\u3000它到底是什么？' },
+    { id: 'c4_ch8_s37', type: 'narrative', content: '' },
+    { id: 'c4_ch8_s38', type: 'narrative', content: '\u3000\u3000<strong>祂到底是什么？</strong>' }
+  ]
+};

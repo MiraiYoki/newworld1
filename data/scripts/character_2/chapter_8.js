@@ -1,0 +1,46 @@
+if (!window.SCRIPT_DATA) window.SCRIPT_DATA = {};
+if (!window.SCRIPT_DATA['character_2']) window.SCRIPT_DATA['character_2'] = {};
+
+window.SCRIPT_DATA['character_2']['chapter_8'] = {
+  title: '航海家',
+  subtitle: '',
+  sections: [
+    { id: 'c2_ch8_s1', type: 'narrative', content: '[small]故事到这里就接近尾声了[/small]' },
+    { id: 'c2_ch8_s2', type: 'narrative', content: '[small]我也要继续踏上旅途了[/small]' },
+    { id: 'c2_ch8_s3', type: 'narrative', content: '[small]希望一切都好[/small]' },
+    { id: 'c2_ch8_s4', type: 'narrative', content: '[small]致[/small]' },
+    { id: 'c2_ch8_s5', type: 'narrative', content: '[small]敬礼[/small]' },
+    { id: 'c2_ch8_s6', type: 'narrative', content: '' },
+    { id: 'c2_ch8_s7', type: 'narrative', content: '[center]<strong>假若他日相逢，我该以何问你？</strong>[/center]' },
+    { id: 'c2_ch8_s8', type: 'narrative', content: '[center]<strong>以眼泪，以沉默。</strong>[/center]' },
+    { id: 'c2_ch8_s9', type: 'narrative', content: '' },
+    { id: 'c2_ch8_s10', type: 'narrative', content: '\u3000\u3000巨龙心脏的守护灵，将你们困于这座孤岛。' },
+    { id: 'c2_ch8_s11', type: 'narrative', content: '\u3000\u3000这是天和地的终点，是一座高大的坟墓……埋葬着一个古老的、永恒的灵瑰。' },
+    { id: 'c2_ch8_s12', type: 'narrative', content: '\u3000\u3000你们望着那颗被包裹在水晶中的、不断跳动的心脏，众人都没有言语。在这样极度的安静中，天地间似乎只有这颗心脏跳动的嗡鸣声，山川潮汐都为之回响。' },
+    { id: 'c2_ch8_s13', type: 'narrative', content: '\u3000\u3000<strong>"龙已经死了。"</strong>守护灵毫无情感地说道。' },
+    { id: 'c2_ch8_s14', type: 'narrative', content: '\u3000\u3000——龙已经死去很久很久了。' },
+    { id: 'c2_ch8_s15', type: 'narrative', content: '\u3000\u3000久到曾经如废墟般荒芜的土地，如今已经遍布鲜花。' },
+    { id: 'c2_ch8_s16', type: 'narrative', content: '' },
+    { id: 'c2_ch8_s17', type: 'narrative', content: '\u3000\u3000渐渐地，在这样压抑的宁静中，在龙的心跳声下，你回忆起了自己远行的目的。' },
+    { id: 'c2_ch8_s18', type: 'narrative', content: '' },
+    { id: 'c2_ch8_s19', type: 'narrative', content: '\u3000\u3000你的名字是<strong>沈泊安</strong>，母亲希望你能在人生航线上找到自己的归处，安心停泊。自小，你便喜欢泡在她的书房里，阅读那些成排成列的大部头。从书中，你早早了解到，你所出生的时代，是一个非常幸运的时代。人类在这个世界经历了成千上万年的变迁，从农耕时代进入工业时代，再从工业时代发展到科技时代。科技大爆炸后，战争连绵不朽，人类从极度的兴盛转入彻骨的寒冬，疾病、瘟疫、天灾纷纷降临。' },
+    { id: 'c2_ch8_s20', type: 'narrative', content: '\u3000\u3000就在两个世纪前，还发生过一起世界规模的疾病。那病被称为<strong>月光综合征</strong>，死伤无数，人口大量锐减，直到最后，人们才战胜了病毒，花了非常大的代价和努力，将这项疾病永远封存在历史的河流中。' },
+    { id: 'c2_ch8_s21', type: 'narrative', content: '\u3000\u3000在那之后，已经度过两百年的和平时代了。' },
+    { id: 'c2_ch8_s22', type: 'narrative', content: '' },
+    { id: 'c2_ch8_s23', type: 'narrative', content: '\u3000\u3000不过只是历史上所记载的东西罢了。' },
+    { id: 'c2_ch8_s24', type: 'narrative', content: '' },
+    { id: 'c2_ch8_s25', type: 'narrative', content: '\u3000\u3000你与其他人一样，在这个幸运的时代中，过着平淡而守序的生活。长大、读书、认识世间万物，有一些伙伴和朋友，伴随日月更迭而宁静地生活。' },
+    { id: 'c2_ch8_s26', type: 'narrative', content: '' },
+    { id: 'c2_ch8_s27', type: 'narrative', content: '\u3000\u3000大概……这就是最普通、最没有波澜的生活。' },
+    { id: 'c2_ch8_s28', type: 'narrative', content: '' },
+    { id: 'c2_ch8_s29', type: 'narrative', content: '\u3000\u3000但又是从什么时候起，你选择踏上这条旅途呢？这座在海上的孤岛，是曾经战争后的存留地，上面是曾经月光综合征爆发的土地，在动荡结束后只剩一片废墟。经过时间和自然的安抚，过了数百年的时间，才重新焕发生机。' },
+    { id: 'c2_ch8_s30', type: 'narrative', content: '' },
+    { id: 'c2_ch8_s31', type: 'narrative', content: '\u3000\u3000你给自己起名叫<strong>"航海家"</strong>，是因为冥冥之中的感应，还是因为你在很久很久以前，便梦想着要展开一场惊心动魄的海上奇旅？' },
+    { id: 'c2_ch8_s32', type: 'narrative', content: '' },
+    { id: 'c2_ch8_s33', type: 'narrative', content: '\u3000\u3000到底为什么，你要到这座岛上来呢，你眼前这颗巨龙的心脏……' },
+    { id: 'c2_ch8_s34', type: 'narrative', content: '' },
+    { id: 'c2_ch8_s35', type: 'narrative', content: '\u3000\u3000它到底是什么？' },
+    { id: 'c2_ch8_s36', type: 'narrative', content: '' },
+    { id: 'c2_ch8_s37', type: 'narrative', content: '\u3000\u3000<strong>祂到底是什么？</strong>' }
+  ]
+};
