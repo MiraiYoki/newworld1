@@ -2791,6 +2791,11 @@
   font-size: 0.95rem;
   line-height: 1.6;
 }
+.quote-highlight {
+  color: #d4a054;
+  font-weight: 600;
+  text-shadow: 0 0 8px rgba(212, 160, 84, 0.4);
+}
 .broadcast-image-container {
   margin-top: 1.5rem;
   padding-top: 1rem;

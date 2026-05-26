@@ -522,7 +522,7 @@
   <script src="data/index.js"></script>
   <script src="data/characters.js"></script>
   <script src="data/evidence.js"></script>
-  <script src="data/letters.js"></script>
+  <script src="data/letters.js?t=2024052603"></script>
   <script src="data/tasks.js"></script>
 
   <!-- 阅读器核心 -->
@@ -759,7 +759,7 @@
               html += '<div class="para-ornament">◆</div>';
             }
             html += '<p class="text-block' + (isCenterSection ? ' center-bold' : '') + (isSmallSection ? ' small-text' : '') + '" data-section-id="' + sec.id + '_' + pIdx + '">'
-              + escapeHtml(para)
+              + highlightQuotes(escapeHtml(para))
                 .replace(/&lt;strong&gt;/g, '<strong>').replace(/&lt;\/strong&gt;/g, '</strong>')
                 .replace(/&lt;center&gt;/g, '').replace(/&lt;\/center&gt;/g, '')
                 .replace(/&lt;small&gt;/g, '').replace(/&lt;\/small&gt;/g, '')
@@ -790,7 +790,7 @@
         if (!line) return;
         // 舞台说明 / 旁白（括号包裹或以 * 开头）
         if (/^[（(＊*]/.test(line) || /^\(/.test(line)) {
-          h += '<div class="theater-stage-dir">' + escapeHtml(line.replace(/^[＊*]\s*/, '')) + '</div>';
+          h += '<div class="theater-stage-dir">' + highlightQuotes(escapeHtml(line.replace(/^[＊*]\s*/, ''))) + '</div>';
           return;
         }
         // 分隔线
@@ -804,14 +804,32 @@
           var charName = m[1].trim();
           h += '<div class="theater-line">'
             + '<span class="char-name c-' + escapeHtml(charName) + '">' + escapeHtml(charName) + '：</span>'
-            + '<span class="char-dialogue">' + escapeHtml(m[2].trim()) + '</span>'
+            + '<span class="char-dialogue">' + highlightQuotes(escapeHtml(m[2].trim())) + '</span>'
             + '</div>';
         } else {
-          h += '<div class="theater-line">' + escapeHtml(line) + '</div>';
+          h += '<div class="theater-line">' + highlightQuotes(escapeHtml(line)) + '</div>';
         }
       });
       h += '</div>';
       return h;
+    }
+
+    function highlightQuotes(str) {
+      // 处理中文双引号
+      str = str.replace(/&ldquo;([^&]*?)&rdquo;/g, '<span class="quote-highlight">&ldquo;$1&rdquo;</span>');
+      // 处理中文单引号
+      str = str.replace(/&lsquo;([^&]*?)&rsquo;/g, '<span class="quote-highlight">&lsquo;$1&rsquo;</span>');
+      // 处理英文双引号（直引号）
+      str = str.replace(/"([^"]*?)"/g, '<span class="quote-highlight">"$1"</span>');
+      // 处理英文单引号（注意避免与撇号混淆）
+      str = str.replace(/'([^']*?)'/g, function(match, group) {
+        // 如果是单词中的撇号（如 I'm, don't），则不处理
+        if (/\w'\w/.test(match)) {
+          return match;
+        }
+        return '<span class="quote-highlight">\'' + group + '\'</span>';
+      });
+      return str;
     }
 
     function escapeHtml(str) {
@@ -1781,6 +1799,16 @@
         html += '<span class="special-option-arrow">→</span>';
         html += '</button>';
       }
+      // 唐潮专属结局
+      if (typeof TANGCHAO_ENDING !== 'undefined' && TANGCHAO_ENDING.visibleTo && TANGCHAO_ENDING.visibleTo.indexOf(currentCharId) >= 0) {
+        html += '<button class="special-option-btn tangchao-ending-option" onclick="openTangchaoEnding()">';
+        html += '<span class="special-option-icon">';
+        html += '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2l2 7h7l-5.5 4 2 7L12 16l-5.5 4 2-7L3 9h7z"/></svg>';
+        html += '</span>';
+        html += '<span class="special-option-text">' + escapeHtml(TANGCHAO_ENDING.title) + '</span>';
+        html += '<span class="special-option-arrow">→</span>';
+        html += '</button>';
+      }
       // 唐潮专属：挟剑惊风
       if (typeof TANGCHAO_XIEJIAN_JINGFENG !== 'undefined' && TANGCHAO_XIEJIAN_JINGFENG.visibleTo && TANGCHAO_XIEJIAN_JINGFENG.visibleTo.indexOf(currentCharId) >= 0) {
         html += '<button class="special-option-btn tangchao-xiejian-option" onclick="openTangchaoXiejianJingfeng()">';
@@ -1861,6 +1889,16 @@
         html += '<span class="special-option-arrow">→</span>';
         html += '</button>';
       }
+      // 李云意专属：破晓
+      if (typeof LIYUNYI_POXIAO !== 'undefined' && LIYUNYI_POXIAO.visibleTo && LIYUNYI_POXIAO.visibleTo.indexOf(currentCharId) >= 0) {
+        html += '<button class="special-option-btn liyunyi-poxia-option" onclick="openLiyunyiPoxia()">';
+        html += '<span class="special-option-icon">';
+        html += '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>';
+        html += '</span>';
+        html += '<span class="special-option-text">' + escapeHtml(LIYUNYI_POXIAO.title) + '</span>';
+        html += '<span class="special-option-arrow">→</span>';
+        html += '</button>';
+      }
       // 江雪专属：挟剑惊风
       if (typeof JIANGXUE_XIEJIAN_JINGFENG !== 'undefined' && JIANGXUE_XIEJIAN_JINGFENG.visibleTo && JIANGXUE_XIEJIAN_JINGFENG.visibleTo.indexOf(currentCharId) >= 0) {
         html += '<button class="special-option-btn jiangxue-xiejian-option" onclick="openJiangxueXiejianJingfeng()">';
@@ -1878,6 +1916,16 @@
         html += '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>';
         html += '</span>';
         html += '<span class="special-option-text">' + escapeHtml(JIANGXUE_POXIAO.title) + '</span>';
+        html += '<span class="special-option-arrow">→</span>';
+        html += '</button>';
+      }
+      // 贺冬青专属结局
+      if (typeof HEDONGQING_ENDING_CONFIG !== 'undefined' && HEDONGQING_ENDING_CONFIG.visibleTo && HEDONGQING_ENDING_CONFIG.visibleTo.indexOf(currentCharId) >= 0) {
+        html += '<button class="special-option-btn hedongqing-ending-option" onclick="openHedongqingEnding()">';
+        html += '<span class="special-option-icon">';
+        html += '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2l2 7h7l-5.5 4 2 7L12 16l-5.5 4 2-7L3 9h7z"/></svg>';
+        html += '</span>';
+        html += '<span class="special-option-text">' + escapeHtml(HEDONGQING_ENDING_CONFIG.title) + '</span>';
         html += '<span class="special-option-arrow">→</span>';
         html += '</button>';
       }
@@ -1911,16 +1959,6 @@
         html += '<span class="special-option-arrow">→</span>';
         html += '</button>';
       }
-      // 贺冬青专属结局
-      if (typeof HEDONGQING_ENDING_CONFIG !== 'undefined' && HEDONGQING_ENDING_CONFIG.visibleTo && HEDONGQING_ENDING_CONFIG.visibleTo.indexOf(currentCharId) >= 0) {
-        html += '<button class="special-option-btn hedongqing-ending-option" onclick="openHedongqingEnding()">';
-        html += '<span class="special-option-icon">';
-        html += '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2l2 7h7l-5.5 4 2 7L12 16l-5.5 4 2-7L3 9h7z"/></svg>';
-        html += '</span>';
-        html += '<span class="special-option-text">' + escapeHtml(HEDONGQING_ENDING_CONFIG.title) + '</span>';
-        html += '<span class="special-option-arrow">→</span>';
-        html += '</button>';
-      }
       // 周然的世界（唐潮专属）
       if (currentCharId === 'character_1') {
         html += '<button class="special-option-btn zhouran-world-option" onclick="openZhouRanWorld()">';
@@ -1928,16 +1966,6 @@
         html += '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>';
         html += '</span>';
         html += '<span class="special-option-text">周然的世界</span>';
-        html += '<span class="special-option-arrow">→</span>';
-        html += '</button>';
-      }
-      // 唐潮专属结局
-      if (typeof TANGCHAO_ENDING !== 'undefined' && TANGCHAO_ENDING.visibleTo && TANGCHAO_ENDING.visibleTo.indexOf(currentCharId) >= 0) {
-        html += '<button class="special-option-btn tangchao-ending-option" onclick="openTangchaoEnding()">';
-        html += '<span class="special-option-icon">';
-        html += '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2l2 7h7l-5.5 4 2 7L12 16l-5.5 4 2-7L3 9h7z"/></svg>';
-        html += '</span>';
-        html += '<span class="special-option-text">' + escapeHtml(TANGCHAO_ENDING.title) + '</span>';
         html += '<span class="special-option-arrow">→</span>';
         html += '</button>';
       }
@@ -2284,31 +2312,39 @@
     // ===== 会议室小剧场 =====
     window.openMeetingTheater = function() {
       if (typeof MEETING_THEATER === 'undefined') return;
+      var overlay = document.getElementById('mtOverlay');
       var paper = document.getElementById('mtPaper');
-      var html = '<div class="mt-title">' + escapeHtml(MEETING_THEATER.title) + '</div>';
-      html += '<div class="mt-body">';
+      var speakerStyles = {
+        '唐潮': { color: '#6b8e9f', bg: '#eef3f5' },
+        '周然': { color: '#8e6fad', bg: '#f3eef8' },
+        '任鸣': { color: '#c9a962', bg: '#faf6ed' },
+        '贺冬青': { color: '#8b9a7c', bg: '#f0f3ef' },
+        '沈泊安': { color: '#d4a5c9', bg: '#faf3f7' },
+        '江雪': { color: '#a08060', bg: '#f5f0eb' },
+        '李云意': { color: '#9fa8b8', bg: '#f0f2f5' },
+        '章禹': { color: '#5a5a5a', bg: '#f0f0f0' },
+        '游隼': { color: '#7a6f5c', bg: '#f5f3ef' },
+        '信天翁': { color: '#6c8fa6', bg: '#eff4f7' },
+        '江雪': { color: '#a08060', bg: '#f5f0eb' }
+      };
+      var html = '<div class="broadcast-title">' + escapeHtml(MEETING_THEATER.title) + '</div>';
+      html += '<div class="broadcast-body">';
       MEETING_THEATER.lines.forEach(function(line) {
-        if (line === '') {
-          html += '<div class="mt-empty"></div>';
-          return;
-        }
-        var match = line.match(/^【(.+?)】(.*)$/);
-        if (match) {
-          var charName = match[1];
-          var rest = match[2];
-          var charId = MEETING_THEATER.boldMap[charName];
-          if (charId && charId === currentCharId) {
-            html += '<p class="mt-line mt-bold">' + escapeHtml(line) + '</p>';
+        if (line.speaker !== undefined) {
+          if (line.speaker === '') {
+            html += '<p class="broadcast-narration">' + highlightQuotes(escapeHtml(line.text)) + '</p>';
           } else {
-            html += '<p class="mt-line">' + escapeHtml(line) + '</p>';
+            var style = speakerStyles[line.speaker] || speakerStyles['唐潮'];
+            html += '<div class="broadcast-line" style="background:' + style.bg + ';border-left-color:' + style.color + '">';
+            html += '<span class="broadcast-speaker" style="color:' + style.color + '">' + escapeHtml(line.speaker) + '</span>';
+            html += '<span class="broadcast-text">' + highlightQuotes(escapeHtml(line.text)) + '</span>';
+            html += '</div>';
           }
-        } else {
-          html += '<p class="mt-line">' + escapeHtml(line) + '</p>';
         }
       });
       html += '</div>';
       paper.innerHTML = html;
-      document.getElementById('mtOverlay').classList.add('show');
+      overlay.classList.add('show');
       document.body.style.overflow = 'hidden';
     };
 
@@ -2320,49 +2356,84 @@
     // ===== 表决小剧场 =====
     window.openVoteTheater = function() {
       if (typeof VOTE_THEATER === 'undefined') return;
+      var overlay = document.getElementById('mtOverlay');
       var paper = document.getElementById('mtPaper');
-      var html = '<div class="mt-title">' + escapeHtml(VOTE_THEATER.title) + '</div>';
-      html += '<div class="mt-body">';
+      var speakerStyles = {
+        '唐潮': { color: '#6b8e9f', bg: '#eef3f5' },
+        '周然': { color: '#8e6fad', bg: '#f3eef8' },
+        '任鸣': { color: '#c9a962', bg: '#faf6ed' },
+        '贺冬青': { color: '#8b9a7c', bg: '#f0f3ef' },
+        '沈泊安': { color: '#d4a5c9', bg: '#faf3f7' },
+        '江雪': { color: '#a08060', bg: '#f5f0eb' },
+        '李云意': { color: '#9fa8b8', bg: '#f0f2f5' },
+        '章禹': { color: '#5a5a5a', bg: '#f0f0f0' },
+        '游隼': { color: '#7a6f5c', bg: '#f5f3ef' },
+        '信天翁': { color: '#6c8fa6', bg: '#eff4f7' }
+      };
+      var html = '<div class="broadcast-title">' + escapeHtml(VOTE_THEATER.title) + '</div>';
+      html += '<div class="broadcast-body">';
       VOTE_THEATER.lines.forEach(function(line) {
-        var isBold = false;
-        if (line.speaker && VOTE_THEATER.boldMap[line.speaker] === currentCharId) {
-          isBold = true;
-        }
-        var lineText = (line.speaker ? line.speaker + '：' : '') + line.text;
-        if (isBold) {
-          html += '<p class="mt-line mt-bold">' + escapeHtml(lineText) + '</p>';
-        } else {
-          html += '<p class="mt-line">' + escapeHtml(lineText) + '</p>';
+        if (line.speaker !== undefined) {
+          if (line.speaker === '') {
+            html += '<p class="broadcast-narration">' + highlightQuotes(escapeHtml(line.text)) + '</p>';
+          } else {
+            var style = speakerStyles[line.speaker] || speakerStyles['唐潮'];
+            html += '<div class="broadcast-line" style="background:' + style.bg + ';border-left-color:' + style.color + '">';
+            html += '<span class="broadcast-speaker" style="color:' + style.color + '">' + escapeHtml(line.speaker) + '</span>';
+            html += '<span class="broadcast-text">' + highlightQuotes(escapeHtml(line.text)) + '</span>';
+            html += '</div>';
+          }
         }
       });
       html += '</div>';
       paper.innerHTML = html;
-      document.getElementById('mtOverlay').classList.add('show');
+      overlay.classList.add('show');
       document.body.style.overflow = 'hidden';
+    };
+
+    window.closeVoteTheater = function() {
+      document.getElementById('mtOverlay').classList.remove('show');
+      document.body.style.overflow = '';
     };
 
     // ===== 教堂小剧场 =====
     window.openChurchTheater = function() {
       if (typeof CHURCH_THEATER === 'undefined') return;
+      var overlay = document.getElementById('mtOverlay');
       var paper = document.getElementById('mtPaper');
-      var html = '<div class="mt-title">' + escapeHtml(CHURCH_THEATER.title) + '</div>';
-      html += '<div class="mt-body">';
+      var speakerStyles = {
+        '唐潮': { color: '#6b8e9f', bg: '#eef3f5' },
+        '周然': { color: '#8e6fad', bg: '#f3eef8' },
+        '任鸣': { color: '#c9a962', bg: '#faf6ed' },
+        '贺冬青': { color: '#8b9a7c', bg: '#f0f3ef' },
+        '沈泊安': { color: '#d4a5c9', bg: '#faf3f7' },
+        '江雪': { color: '#a08060', bg: '#f5f0eb' },
+        '李云意': { color: '#9fa8b8', bg: '#f0f2f5' }
+      };
+      var html = '<div class="broadcast-title">' + escapeHtml(CHURCH_THEATER.title) + '</div>';
+      html += '<div class="broadcast-body">';
       CHURCH_THEATER.lines.forEach(function(line) {
-        var isBold = false;
-        if (line.speaker && CHURCH_THEATER.boldMap[line.speaker] === currentCharId) {
-          isBold = true;
-        }
-        var lineText = (line.speaker ? line.speaker + '：' : '') + line.text;
-        if (isBold) {
-          html += '<p class="mt-line mt-bold">' + escapeHtml(lineText) + '</p>';
-        } else {
-          html += '<p class="mt-line">' + escapeHtml(lineText) + '</p>';
+        if (line.speaker !== undefined) {
+          if (line.speaker === '') {
+            html += '<p class="broadcast-narration">' + highlightQuotes(escapeHtml(line.text)) + '</p>';
+          } else {
+            var style = speakerStyles[line.speaker] || speakerStyles['唐潮'];
+            html += '<div class="broadcast-line" style="background:' + style.bg + ';border-left-color:' + style.color + '">';
+            html += '<span class="broadcast-speaker" style="color:' + style.color + '">' + escapeHtml(line.speaker) + '</span>';
+            html += '<span class="broadcast-text">' + highlightQuotes(escapeHtml(line.text)) + '</span>';
+            html += '</div>';
+          }
         }
       });
       html += '</div>';
       paper.innerHTML = html;
-      document.getElementById('mtOverlay').classList.add('show');
+      overlay.classList.add('show');
       document.body.style.overflow = 'hidden';
+    };
+
+    window.closeChurchTheater = function() {
+      document.getElementById('mtOverlay').classList.remove('show');
+      document.body.style.overflow = '';
     };
 
     // ===== 广播小剧场 =====
@@ -2371,13 +2442,14 @@
       var overlay = document.getElementById('mtOverlay');
       var paper = document.getElementById('mtPaper');
       var speakerStyles = {
-        '唐潮': { color: '#5a8fc7', bg: '#eef4f9' },
+        '唐潮': { color: '#6b8e9f', bg: '#eef3f5' },
         '周然': { color: '#8e6fad', bg: '#f3eef8' },
-        '任鸣': { color: '#c76d6d', bg: '#f9eeee' },
-        '贺冬青': { color: '#c9a857', bg: '#faf6ed' },
-        '沈泊安': { color: '#5aaba0', bg: '#eef6f5' },
-        '江雪': { color: '#b87a9e', bg: '#f5eef3' },
-        '李云意': { color: '#6a9a6a', bg: '#eef4ee' }
+        '任鸣': { color: '#c9a962', bg: '#faf6ed' },
+        '贺冬青': { color: '#8b9a7c', bg: '#f0f3ef' },
+        '沈泊安': { color: '#d4a5c9', bg: '#faf3f7' },
+        '江雪': { color: '#a08060', bg: '#f5f0eb' },
+        '李云意': { color: '#9fa8b8', bg: '#f0f2f5' },
+        '唐一': { color: '#5a5a5a', bg: '#f0f0f0' }
       };
       var html = '<div class="broadcast-title">' + escapeHtml(BROADCAST_THEATER.title) + '</div>';
       html += '<div class="broadcast-body">';
@@ -2386,10 +2458,10 @@
           var style = speakerStyles[line.speaker] || speakerStyles['唐潮'];
           html += '<div class="broadcast-line" style="background:' + style.bg + ';border-left-color:' + style.color + '">';
           html += '<span class="broadcast-speaker" style="color:' + style.color + '">' + escapeHtml(line.speaker) + '</span>';
-          html += '<span class="broadcast-text">' + escapeHtml(line.text) + '</span>';
+          html += '<span class="broadcast-text">' + highlightQuotes(escapeHtml(line.text)) + '</span>';
           html += '</div>';
         } else {
-          html += '<p class="broadcast-narration">' + escapeHtml(line.text) + '</p>';
+          html += '<p class="broadcast-narration">' + highlightQuotes(escapeHtml(line.text)) + '</p>';
         }
       });
       html += '</div>';
@@ -3826,6 +3898,30 @@
       var html = '<div class="character-ending-title">' + escapeHtml(LIYUNYI_XIEJIAN_JINGFENG.title) + '</div>';
       html += '<div class="character-ending-body">';
       LIYUNYI_XIEJIAN_JINGFENG.content.forEach(function(para) {
+        if (para === '') {
+          html += '<p class="character-ending-empty">&nbsp;</p>';
+        } else {
+          var isCenter = para.indexOf('[center]') >= 0;
+          html += '<p class="character-ending-para"' + (isCenter ? ' style="text-align:center;font-weight:bold;"' : '') + '>' 
+            + escapeHtml(para)
+              .replace(/&lt;strong&gt;/g, '<strong>').replace(/&lt;\/strong&gt;/g, '</strong>')
+              .replace(/\[center\]/g, '').replace(/\[\/center\]/g, '')
+            + '</p>';
+        }
+      });
+      html += '</div>';
+      paper.innerHTML = html;
+      document.getElementById('characterEndingOverlay').classList.add('show');
+      document.body.style.overflow = 'hidden';
+    };
+
+    // ===== 李云意专属：破晓 =====
+    window.openLiyunyiPoxia = function() {
+      if (typeof LIYUNYI_POXIAO === 'undefined') return;
+      var paper = document.getElementById('characterEndingPaper');
+      var html = '<div class="character-ending-title">' + escapeHtml(LIYUNYI_POXIAO.title) + '</div>';
+      html += '<div class="character-ending-body">';
+      LIYUNYI_POXIAO.content.forEach(function(para) {
         if (para === '') {
           html += '<p class="character-ending-empty">&nbsp;</p>';
         } else {
